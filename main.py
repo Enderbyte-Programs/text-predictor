@@ -79,6 +79,7 @@ else:
             iprompt = ui.strinput("Choose a prompt. For a random prompt, press enter now.")
             if len(iprompt) < config.CONFIG["context_characters"] and iprompt != '':
                 print("Prompt too short; disregarding.")
+                iprompt = ""
             c2g = ui.intinput("How many characters to generate?",0)
 
             gx = routines.generate(analy,c2g,iprompt)

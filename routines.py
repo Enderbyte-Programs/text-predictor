@@ -1,8 +1,10 @@
 import random
+import utils
 import config
 
 def analyze(raw:str) -> dict[str,dict[str,int]]:
     total_chars = len(raw)
+    p_total_chars = utils.parse_size(total_chars)
 
     tdict: dict[str,dict[str,int]] = {}
     uniquechars = []
@@ -28,6 +30,7 @@ def analyze(raw:str) -> dict[str,dict[str,int]]:
             tdict[character][afterchar] = 1
 
         ci += 1
+    print("Analysed ",p_total_chars)
     return tdict
 
 def generate(analysis:dict,noc:int,prompt:str) -> str:
