@@ -15,3 +15,7 @@ def parse_size(data: int) -> str:
     if neg:
         result = "-"+result
     return result
+
+def chunks(xs, n):
+    n = max(1, n)
+    return (xs[i:i+n] for i in range(0, len(xs), n))

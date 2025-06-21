@@ -30,17 +30,23 @@ def analyze(raw:str) -> dict[str,dict[str,int]]:
         ci += 1
     return tdict
 
-def generate(analysis:dict,noc:int) -> str:
-    final = random.choice(list(analysis.keys()))
-    for i in range(noc):
-        #lastchar = final[-5] + final[-4] + final[-3] + final[-2] + final[-1]
-        lastchar = ""
-        for i in range(-config.CONFIG["context_characters"],0):
-            #Counts from -x to 0
-            lastchar += final[i]
-        probarray = []
-        for pset in analysis[lastchar].items():
-            probarray.extend([pset[0] for _ in range(pset[1])])
+def generate(analysis:dict,noc:int,prompt:str) -> str:
+    if prompt == "":
+        final = random.choice(list(analysis.keys()))
+    else:
+        final = prompt
+    try:
+        for i in range(noc):
+            #lastchar = final[-5] + final[-4] + final[-3] + final[-2] + final[-1]
+            lastchar = ""
+            for i in range(-config.CONFIG["context_characters"],0):
+                #Counts from -x to 0
+                lastchar += final[i]
+            probarray = []
+            for pset in analysis[lastchar].items():
+                probarray.extend([pset[0] for _ in range(pset[1])])
 
-        final += random.choice(probarray)
-    return final
+            final += random.choice(probarray)
+        return final
+    except:
+        return "!!! Sorry, no content could be generated from this prompt. Consider providing more training data."

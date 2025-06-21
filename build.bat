@@ -1,0 +1,1 @@
+pyinstaller --onefile --icon=NONE --name dumbai main.py
